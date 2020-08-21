@@ -7,10 +7,17 @@ This repisotory contains Semantik helper tools that can be used for Semantik rel
 
 
 ## Pipe delimited file Export
-Exports the pipe delimited file in the required format with all columns
+Exports Semantik data into a pipe delimited file.  The PowerAutomate application expects the following columns to be exported from Semantik in the order listed below:
+
+- Item #
+- Description
+- Shipped
+- Unit Price
+- Ext Price
+
 
 ## Pipe delimited file export with column filter
-Exports the pipe delimited file but only for columns whose header exactly matches (case-sensitive) the expected column names. Other columns are disregarded and not placed in the file.
+Exports Semantik data into a pipe delimited file but only for columns whose table header exactly matches (case-sensitive) the expected column names. Other columns are disregarded and not placed in the file.
 Currently, the expected column names are:
 
 - Item #
