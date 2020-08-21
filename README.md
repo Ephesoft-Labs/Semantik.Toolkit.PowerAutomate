@@ -1,7 +1,12 @@
 # Semantik.Toolkit.PowerAutomate
 This repisotory contains Semantik helper tools that can be used for Semantik related projects
 
-## Pipe delimited file Export:
+## Table of Contents
+- [Pipe delimited file Export](#Pipe-delimited-file-Export)
+- [Pipe delimited file export with column filter](#Pipe-delimited-file-export-with-column-filter)
+
+
+## Pipe delimited file Export
 Exports the pipe delimited file in the required format with all columns
 
 ## Pipe delimited file export with column filter
