@@ -1,0 +1,54 @@
+{
+  "schema": "1.0",
+  "details": {
+    "displayName": "Gem-v2",
+    "description": "",
+    "createdTime": "2020-08-20T20:30:57.8824735Z",
+    "packageTelemetryId": "8750ff60-6bf7-4b34-bbf5-dc2a19f2b6fd",
+    "creator": "N/A",
+    "sourceEnvironment": ""
+  },
+  "resources": {
+    "811ddd2d-dba1-4cad-b317-691e74d16f99": {
+      "type": "Microsoft.Flow/flows",
+      "suggestedCreationType": "Update",
+      "creationType": "Existing, New, Update",
+      "details": {
+        "displayName": "Semantik-Gem-v2"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Root",
+      "dependsOn": [
+        "0cf2b9ed-1adc-4c23-badc-b92222bae328",
+        "6270861e-034f-4fa6-a868-058edc1a8731"
+      ]
+    },
+    "0cf2b9ed-1adc-4c23-badc-b92222bae328": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_onedrive",
+      "name": "shared_onedrive",
+      "type": "Microsoft.PowerApps/apis",
+      "suggestedCreationType": "Existing",
+      "details": {
+        "displayName": "OneDrive",
+        "iconUri": "https://connectoricons-prod.azureedge.net/onedrive/icon_1.0.1341.1987.png"
+      },
+      "configurableBy": "System",
+      "hierarchy": "Child",
+      "dependsOn": []
+    },
+    "6270861e-034f-4fa6-a868-058edc1a8731": {
+      "type": "Microsoft.PowerApps/apis/connections",
+      "suggestedCreationType": "Existing",
+      "creationType": "Existing",
+      "details": {
+        "displayName": "user@example.com",
+        "iconUri": "https://connectoricons-prod.azureedge.net/onedrive/icon_1.0.1341.1987.png"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Child",
+      "dependsOn": [
+        "0cf2b9ed-1adc-4c23-badc-b92222bae328"
+      ]
+    }
+  }
+}
