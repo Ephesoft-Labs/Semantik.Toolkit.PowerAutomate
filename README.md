@@ -27,7 +27,8 @@ The expected column names are:
 - Shipped
 - Unit Price
 - Ext Price
+
 **Note:** A column name with a period cannot be set as expected as it is an invalid character in Microsoft Flow expression language.
 
 ## License
-Ephesoft Labs is licensed under the [Ephesoft Source Code License]. 
+Ephesoft Labs is licensed under the Ephesoft Source Code License. 
