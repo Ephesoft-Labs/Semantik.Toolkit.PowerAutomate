@@ -1,13 +1,14 @@
 # Semantik.Toolkit.PowerAutomate
-This repisotory contains Semantik helper tools that can be used for Semantik related projects
+**Available for:** Semantik Invoice
 
-## Table of Contents
-- [Pipe delimited file Export](#Pipe-delimited-file-Export)
-- [Pipe delimited file export with column filter](#Pipe-delimited-file-export-with-column-filter)
+## Overview
+This repository contains helper tools that can be used for Semantik-related projects to export the necessary data from Semantik Invoice. 
 
+## Prerequisites
+You will need access to Semantik Invoice and Microsoft PowerAutomate to complete the integration.
 
 ## Pipe delimited file Export
-Exports Semantik data into a pipe delimited file.  The PowerAutomate application expects the following columns to be exported from Semantik in the order listed below:
+This exports Semantik data into a pipe delimited file. PowerAutomate expects the following columns to be exported from Semantik in the order listed below:
 
 - Item #
 - Description
@@ -17,12 +18,16 @@ Exports Semantik data into a pipe delimited file.  The PowerAutomate application
 
 
 ## Pipe delimited file export with column filter
-Exports Semantik data into a pipe delimited file but only for columns whose table header exactly matches (case-sensitive) the expected column names. Other columns are disregarded and not placed in the file.
-Currently, the expected column names are:
+This exports Semantik data into a pipe delimited file for columns with table headers that match (case-sensitive) the expected column names. Other columns are not placed in the file.
+
+The expected column names are:
 
 - Item #
 - Description
 - Shipped
 - Unit Price
 - Ext Price
-**Note** that a column name with a period cannot be set as expected because it is an illegal character in flow expression language.
+**Note:** A column name with a period cannot be set as expected as it is an invalid character in Microsoft Flow expression language.
+
+## License
+Ephesoft Labs is licensed under the [Ephesoft Source Code License]. 
