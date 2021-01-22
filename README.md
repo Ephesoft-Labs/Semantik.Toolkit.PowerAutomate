@@ -15,10 +15,11 @@ To procure a free Semantik Trial account or get in touch, fill out the form here
 
 ## Importing PowerAutomate Templates
 The templates in this repository can be imported as new Microsoft PowerAutomate flows.  Follow these instructions to import a template:
-1. Create a new .zip file containing all files within the template's directory
-2. In PowerAutomate, naviate to My Flows --> Import
-3. Upload the .zip file with template contents
-4. From the Import Package page, click the 'Select during import' link for each required connection to add/select the required connections
+1. Create a new Zip file containing all files within the template's directory
+2. In PowerAutomate, navigate to **My Flows > Import**
+3. Upload the Zip file with template contents
+4. From the **Import Package** page, click the **Select during import** link for each required connection to add/select the required connections
+5. Click the **Import** button, wait for the page to refresh, and verify the import was successful
 
 ## License
 Ephesoft Labs is licensed under the Ephesoft Source Code License.
