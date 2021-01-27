@@ -1,0 +1,83 @@
+{
+  "schema": "1.0",
+  "details": {
+    "displayName": "Ephesoft Semantik Invoice To CSV",
+    "description": "Converts a completed invoice to CSV and saves to a OneDrive for Business account.",
+    "createdTime": "2021-01-22T17:45:16.8505113Z",
+    "packageTelemetryId": "f83c7986-2df4-4039-ba82-7ea115caea68",
+    "creator": "Ephesoft Inc.",
+    "sourceEnvironment": ""
+  },
+  "resources": {
+    "a4272716-6e12-43c5-825b-ad2254a7e30a": {
+      "type": "Microsoft.Flow/flows",
+      "suggestedCreationType": "New",
+      "creationType": "Existing, New, Update",
+      "details": {
+        "displayName": "Ephesoft Semantik Invoice To CSV"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Root",
+      "dependsOn": [
+        "5488d653-b996-483f-9cbd-541622e3322e",
+        "fcebc038-aa95-4973-bd30-81890cbe052a",
+        "20d2ca35-b6e7-4ed5-bdb8-f9cd7006bbc2",
+        "c02fb738-5970-44c5-b6d1-26c435b69d9f"
+      ]
+    },
+    "5488d653-b996-483f-9cbd-541622e3322e": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+      "name": "shared_onedriveforbusiness",
+      "type": "Microsoft.PowerApps/apis",
+      "suggestedCreationType": "Existing",
+      "details": {
+        "displayName": "OneDrive for Business",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1407/1.0.1407.2182/onedriveforbusiness/icon.png"
+      },
+      "configurableBy": "System",
+      "hierarchy": "Child",
+      "dependsOn": []
+    },
+    "fcebc038-aa95-4973-bd30-81890cbe052a": {
+      "type": "Microsoft.PowerApps/apis/connections",
+      "suggestedCreationType": "Existing",
+      "creationType": "Existing",
+      "details": {
+        "displayName": "user@example.com",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1407/1.0.1407.2182/onedriveforbusiness/icon.png"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Child",
+      "dependsOn": [
+        "5488d653-b996-483f-9cbd-541622e3322e"
+      ]
+    },
+    "20d2ca35-b6e7-4ed5-bdb8-f9cd7006bbc2": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_ephesoftsemantikforinvoices",
+      "name": "shared_ephesoftsemantikforinvoices",
+      "type": "Microsoft.PowerApps/apis",
+      "suggestedCreationType": "Existing",
+      "details": {
+        "displayName": "Ephesoft Semantik For Invoices",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1429/1.0.1429.2295/ephesoftsemantikforinvoices/icon.png"
+      },
+      "configurableBy": "System",
+      "hierarchy": "Child",
+      "dependsOn": []
+    },
+    "c02fb738-5970-44c5-b6d1-26c435b69d9f": {
+      "type": "Microsoft.PowerApps/apis/connections",
+      "suggestedCreationType": "Existing",
+      "creationType": "Existing",
+      "details": {
+        "displayName": "Ephesoft Semantik For Invoices",
+        "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1429/1.0.1429.2295/ephesoftsemantikforinvoices/icon.png"
+      },
+      "configurableBy": "User",
+      "hierarchy": "Child",
+      "dependsOn": [
+        "20d2ca35-b6e7-4ed5-bdb8-f9cd7006bbc2"
+      ]
+    }
+  }
+}

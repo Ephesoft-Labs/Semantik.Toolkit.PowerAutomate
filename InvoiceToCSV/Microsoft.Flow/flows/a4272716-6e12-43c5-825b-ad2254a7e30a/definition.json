@@ -1,0 +1,276 @@
+{
+  "name": "c8c3d77e-b99c-4b1b-8a56-14de8e3e89b3",
+  "id": "/providers/Microsoft.Flow/flows/c8c3d77e-b99c-4b1b-8a56-14de8e3e89b3",
+  "type": "Microsoft.Flow/flows",
+  "properties": {
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_logicflows",
+    "displayName": "Ephesoft Semantik Invoice To CSV",
+    "definition": {
+      "metadata": {
+        "workflowEntityId": null,
+        "flowclientsuspensionreason": "None",
+        "flowclientsuspensiontime": null,
+        "creator": {
+          "id": "76887e96-3d91-444a-9fcd-17f5f5006785",
+          "type": "User",
+          "tenantId": "2968d01e-dd78-4c42-b92a-3cd566bc9cda"
+        },
+        "provisioningMethod": "FromDefinition",
+        "failureAlertSubscription": true,
+        "clientLastModifiedTime": "2021-01-22T17:43:15.8750142Z"
+      },
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_Semantik_invoice_has_completed_review": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_ephesoftsemantikforinvoices",
+              "connectionName": "shared_ephesoftsemantikforinvoices",
+              "operationId": "TrigSemantikInvoiceCompleted"
+            },
+            "parameters": {
+              "body/integrationName": "PowerAutomate - Line Items To OneDrive CSV"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Save_PDF_file": {
+          "runAfter": {
+            "Set_OneDrive_Invoice_Folder_Path": [
+              "Succeeded"
+            ]
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+              "connectionName": "shared_onedriveforbusiness",
+              "operationId": "CopyFile"
+            },
+            "parameters": {
+              "source": "@triggerOutputs()?['body/PdfUrl']",
+              "destination": "@{variables('InvoicePath')}/@{triggerOutputs()?['body/DocumentId']}.pdf",
+              "overwrite": true
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Create_header-footer_CSV_content": {
+          "runAfter": {
+            "Set_OneDrive_Invoice_Folder_Path": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "CSVContent",
+                "type": "string",
+                "value": "AmountDue,DocumentId,DueDate,FileName,InvoiceDate,InvoiceNumber,OrderDate,PdfUrl,PONumber,ShipDate,ShipFreight,SubTotal,TableUrl,TaxAmount,TaxId,TaxRate,TenantId,Terms,TotalAmount,VendorID,VendorName,VendorStreetAddress,VendorPOBox,VendorLocality,VendorRegion,VendorPostalCode,VendorCountry,VendorTelephone,VendorCustomerID,VendorStatus,VendorSWIFT,VendorIBAN,VendorCustom1,VendorCustom2,VendorCustom3,VendorCustom4,VendorCustom5,VendorMatched\n@{triggerOutputs()?['body/AmountDue']},@{triggerOutputs()?['body/DocumentId']},@{triggerOutputs()?['body/DueDate']},@{triggerOutputs()?['body/FileName']},@{triggerOutputs()?['body/InvoiceDate']},@{triggerOutputs()?['body/InvoiceNumber']},@{triggerOutputs()?['body/OrderDate']},@{triggerOutputs()?['body/PdfUrl']},@{triggerOutputs()?['body/PONumber']},@{triggerOutputs()?['body/ShipDate']},@{triggerOutputs()?['body/ShipFreight']},@{triggerOutputs()?['body/SubTotal']},@{triggerOutputs()?['body/TableUrl']},@{triggerOutputs()?['body/TaxAmount']},@{triggerOutputs()?['body/TaxId']},@{triggerOutputs()?['body/TaxRate']},@{triggerOutputs()?['body/TenantId']},@{triggerOutputs()?['body/Terms']},@{triggerOutputs()?['body/TotalAmount']},@{triggerOutputs()?['body/Vendor/VendorID']},@{triggerOutputs()?['body/Vendor/VendorName']},@{triggerOutputs()?['body/Vendor/VendorAddress/VendorStreetAddress']},@{triggerOutputs()?['body/Vendor/VendorAddress/VendorPOBox']},@{triggerOutputs()?['body/Vendor/VendorAddress/VendorLocality']},@{triggerOutputs()?['body/Vendor/VendorAddress/VendorRegion']},@{triggerOutputs()?['body/Vendor/VendorAddress/VendorPostalCode']},@{triggerOutputs()?['body/Vendor/VendorAddress/VendorCountry']},@{triggerOutputs()?['body/Vendor/VendorTelephone']},@{triggerOutputs()?['body/Vendor/VendorCustomerID']},@{triggerOutputs()?['body/Vendor/VendorStatus']},@{triggerOutputs()?['body/Vendor/VendorSWIFT']},@{triggerOutputs()?['body/Vendor/VendorIBAN']},@{triggerOutputs()?['body/Vendor/VendorCustom1']},@{triggerOutputs()?['body/Vendor/VendorCustom2']},@{triggerOutputs()?['body/Vendor/VendorCustom3']},@{triggerOutputs()?['body/Vendor/VendorCustom4']},@{triggerOutputs()?['body/Vendor/VendorCustom5']},@{triggerOutputs()?['body/Vendor/VendorMatched']}"
+              }
+            ]
+          }
+        },
+        "Create_header-footer_file": {
+          "runAfter": {
+            "Create_header-footer_CSV_content": [
+              "Succeeded"
+            ]
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+              "connectionName": "shared_onedriveforbusiness",
+              "operationId": "CreateFile"
+            },
+            "parameters": {
+              "folderPath": "@variables('InvoicePath')",
+              "name": "@{triggerOutputs()?['body/DocumentId']}-headerfooter.csv",
+              "body": "@variables('CSVContent')"
+            },
+            "authentication": "@parameters('$authentication')"
+          },
+          "runtimeConfiguration": {
+            "contentTransfer": {
+              "transferMode": "Chunked"
+            }
+          }
+        },
+        "If_line_items_exist,_convert_table_JSON_to_CSV_and_save_in_OneDrive": {
+          "actions": {
+            "Get_table_data_file": {
+              "runAfter": {},
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+                  "connectionName": "shared_onedriveforbusiness",
+                  "operationId": "CopyFile"
+                },
+                "parameters": {
+                  "source": "@triggerOutputs()?['body/TableUrl']",
+                  "destination": "LineItems/@{triggerOutputs()?['body/DocumentId']}",
+                  "overwrite": true
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Get_table_data_content": {
+              "runAfter": {
+                "Get_table_data_file": [
+                  "Succeeded"
+                ]
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+                  "connectionName": "shared_onedriveforbusiness",
+                  "operationId": "GetFileContent"
+                },
+                "parameters": {
+                  "id": "@outputs('Get_table_data_file')?['body/Id']",
+                  "inferContentType": true
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "ConvertBase64ToJSONArray": {
+              "runAfter": {
+                "Get_table_data_content": [
+                  "Succeeded"
+                ]
+              },
+              "type": "Compose",
+              "inputs": "@base64ToString(outputs('Get_table_data_content')['body']['$content'])"
+            },
+            "Parse_JSON": {
+              "runAfter": {
+                "ConvertBase64ToJSONArray": [
+                  "Succeeded"
+                ]
+              },
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@outputs('ConvertBase64ToJSONArray')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "documentId": {
+                      "type": "string"
+                    },
+                    "tableId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "rows": {
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            },
+            "Create_CSV_table": {
+              "runAfter": {
+                "Parse_JSON": [
+                  "Succeeded"
+                ]
+              },
+              "type": "Table",
+              "inputs": {
+                "from": "@body('Parse_JSON')?['rows']",
+                "format": "CSV"
+              }
+            },
+            "Create_line_items_file": {
+              "runAfter": {
+                "Create_CSV_table": [
+                  "Succeeded"
+                ]
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+                  "connectionName": "shared_onedriveforbusiness",
+                  "operationId": "CreateFile"
+                },
+                "parameters": {
+                  "folderPath": "@variables('InvoicePath')",
+                  "name": "@{triggerOutputs()?['body/DocumentId']}-lineitems.csv",
+                  "body": "@body('Create_CSV_table')"
+                },
+                "authentication": "@parameters('$authentication')"
+              },
+              "runtimeConfiguration": {
+                "contentTransfer": {
+                  "transferMode": "Chunked"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Set_OneDrive_Invoice_Folder_Path": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "not": {
+              "equals": [
+                "@triggerOutputs()?['body/TableUrl']",
+                ""
+              ]
+            }
+          },
+          "type": "If"
+        },
+        "Set_OneDrive_Invoice_Folder_Path": {
+          "runAfter": {},
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "InvoicePath",
+                "type": "string",
+                "value": "/InvoiceData"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "connectionReferences": {
+      "shared_onedriveforbusiness": {
+        "connectionName": "shared-onedriveforbu-0c44fde5-c123-4a07-a055-6f768e2815e1",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+        "tier": "NotSpecified"
+      },
+      "shared_ephesoftsemantikforinvoices": {
+        "connectionName": "shared-ephesoftseman-ed40b440-a0f5-4fe0-8ef5-7847-4d821081",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_ephesoftsemantikforinvoices",
+        "tier": "NotSpecified"
+      }
+    },
+    "flowFailureAlertSubscribed": false
+  }
+}
