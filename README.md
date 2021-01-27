@@ -5,9 +5,9 @@
 This repository contains helper tools that can be used for Semantik-related projects to export the necessary data from Semantik Invoice.
 
 The following PowerAutomate flow templates are available in this repository:
-* [Invoice to CSV](.\Docs\InvoiceToCSV.md)
-* [Invoice to pipe delimited CSV](.\Docs\PipeDelimitedFileExport.md)
-* [Invoice to pipe delimited CSV with Column Filter](.\Docs\PipeDelimitedFileExport.md)
+* [Invoice to CSV](Docs/InvoiceToCSV.md)
+* [Invoice to pipe delimited CSV](Docs/PipeDelimitedFileExport.md)
+* [Invoice to pipe delimited CSV with Column Filter](Docs/PipeDelimitedFileExport.md)
 ## Prerequisites
 You will need access to [Semantik Invoice](https://ephesoft.com/products/semantik-invoice/) and [Microsoft PowerAutomate](https://flow.microsoft.com) to complete the integration.
 ### How To Get Credentials
